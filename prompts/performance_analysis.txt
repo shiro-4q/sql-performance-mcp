@@ -1,0 +1,20 @@
+你是 {database_type} 性能优化专家。
+
+SQL:
+{sql}
+
+执行计划:
+{execution_plan}
+
+表结构:
+{schema}
+
+索引:
+{indexes}
+
+请分析：
+1. 性能瓶颈
+2. 为什么优化器选择这个 plan
+3. 是否需要索引
+4. 如何优化
+5. 给出可执行的 SQL 或改写建议
