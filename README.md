@@ -1,5 +1,7 @@
 # sql-performance-mcp
 
+[中文说明](README.zh-CN.md)
+
 MySQL SQL performance analysis MCP server.
 
 The workflow is:
@@ -41,8 +43,6 @@ Arguments:
 - `database`: optional MySQL database name.
 - `tables`: optional explicit table list.
 
-## Prompt
-
 ### `analyze_performance`
 
 Builds a MySQL performance analysis prompt from:
@@ -51,8 +51,6 @@ Builds a MySQL performance analysis prompt from:
 - `execution_plan`
 - `schema`
 - `indexes`
-
-The prompt template lives in `prompts/performance_analysis.txt`.
 
 ## Configuration
 
@@ -84,13 +82,18 @@ uv sync
 Run the MCP server:
 
 ```powershell
-uv run python server.py
+uv run sql-performance-mcp
 ```
 
-If you are not using `uv`, install from `requirements.txt` and run `python server.py`.
+If you are not using `uv`, install from `requirements.txt` and run:
+
+```powershell
+python -m sql_performance_mcp.server
+```
 
 ## Notes
 
 - Only MySQL is implemented now.
 - `get_execution_plan` accepts one SQL statement only.
 - SQL table extraction covers common `FROM`, `JOIN`, `UPDATE`, and `INSERT INTO` patterns. For CTEs, nested SQL, or generated SQL, pass `tables` explicitly to schema and index tools.
+

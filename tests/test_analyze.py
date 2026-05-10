@@ -3,7 +3,7 @@
 import unittest
 
 # 导入要测试的函数。
-from tools.analyze import analyze_performance
+from sql_performance_mcp.tools.analyze import analyze_performance
 
 
 # 继承 unittest.TestCase，表示这是一个测试类。
@@ -23,7 +23,7 @@ class AnalyzeTests(unittest.TestCase):
         # self.assertIn(a, b) 的意思是：断言 a 出现在 b 里面。
         # 如果 a 不在 b 中，这个测试就会失败。
         # 这里是在验证 analyze_performance 返回的 prompt 是否包含关键上下文信息。
-        self.assertIn("你是 MySQL 性能优化专家。", prompt)
+        self.assertIn("You are a MySQL performance optimization expert.", prompt)
         self.assertIn("select * from users where id = 1", prompt)
         self.assertIn('"table": "users"', prompt)
         self.assertIn('"COLUMN_NAME": "id"', prompt)

@@ -1,11 +1,29 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import Any
 
+PROMPT_TEMPLATE = """You are a MySQL performance optimization expert.
 
-PROMPT_TEMPLATE = Path(__file__).resolve().parents[1] / "prompts" / "performance_analysis.txt"
+SQL:
+{sql}
+
+Execution plan:
+{execution_plan}
+
+Table schema:
+{schema}
+
+Indexes:
+{indexes}
+
+Please analyze:
+1. Performance bottlenecks
+2. Why the optimizer chose this plan
+3. Whether indexes are needed
+4. How to optimize
+5. Provide actionable SQL or rewrite suggestions
+"""
 
 
 def analyze_performance(
@@ -15,9 +33,7 @@ def analyze_performance(
     indexes: Any,
     database_type: str = "MySQL",
 ) -> str:
-    """组装给大模型使用的 SQL 性能分析 prompt。"""
-    template = PROMPT_TEMPLATE.read_text(encoding="utf-8")
-    return template.format(
+    return PROMPT_TEMPLATE.format(
         database_type=database_type,
         sql=sql,
         execution_plan=_format_context(execution_plan),
@@ -27,7 +43,6 @@ def analyze_performance(
 
 
 def _format_context(value: Any) -> str:
-    """把 tool 返回的结构化对象格式化为易读 JSON，字符串则原样保留。"""
     if isinstance(value, str):
         return value
     return json.dumps(value, ensure_ascii=False, indent=2, default=str)

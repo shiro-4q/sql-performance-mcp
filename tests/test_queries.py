@@ -2,7 +2,7 @@
 import unittest
 
 # 导入要测试的函数。
-from db.queries import ensure_single_statement, extract_table_names, split_table_name
+from sql_performance_mcp.db.queries import ensure_single_statement, extract_table_names, split_table_name
 
 
 class QueryTests(unittest.TestCase):
