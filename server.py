@@ -40,9 +40,9 @@ def get_indexes(
     return fetch_indexes(sql=sql, database=database, tables=tables)
 
 
-@mcp.prompt()
+@mcp.tool()
 def analyze_performance(sql: str, execution_plan: str, schema: str, indexes: str) -> str:
-    """组装 SQL 性能分析 prompt，不在 MCP 服务内直接调用大模型。"""
+    """组装 SQL 性能分析 prompt。"""
     return build_performance_analysis_prompt(
         sql=sql,
         execution_plan=execution_plan,

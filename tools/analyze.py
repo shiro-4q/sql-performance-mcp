@@ -16,7 +16,6 @@ def analyze_performance(
     database_type: str = "MySQL",
 ) -> str:
     """组装给大模型使用的 SQL 性能分析 prompt。"""
-    # 分析步骤只负责拼 prompt，不直接调用模型，便于 MCP 客户端自行选择模型。
     template = PROMPT_TEMPLATE.read_text(encoding="utf-8")
     return template.format(
         database_type=database_type,

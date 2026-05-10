@@ -1,20 +1,20 @@
-你是 {database_type} 性能优化专家。
+You are a MySQL performance optimization expert.
 
 SQL:
 {sql}
 
-执行计划:
+Execution plan:
 {execution_plan}
 
-表结构:
+Table schema:
 {schema}
 
-索引:
+Indexes:
 {indexes}
 
-请分析：
-1. 性能瓶颈
-2. 为什么优化器选择这个 plan
-3. 是否需要索引
-4. 如何优化
-5. 给出可执行的 SQL 或改写建议
+Please analyze:
+1. Performance bottlenecks
+2. Why the optimizer chose this plan
+3. Whether indexes are needed
+4. How to optimize
+5. Provide actionable SQL or rewrite suggestions
