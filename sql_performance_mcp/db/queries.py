@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-_IDENTIFIER = r"(?:`[^`]+`|[A-Za-z_][\w$]*)"
+_IDENTIFIER = r"(?:`[^`]+`|\"[^\"]+\"|\[[^\]]+\]|[A-Za-z_][\w$]*)"
 _QUALIFIED_IDENTIFIER = rf"{_IDENTIFIER}(?:\s*\.\s*{_IDENTIFIER})?"
 
 _TABLE_PATTERN = re.compile(
@@ -12,13 +12,20 @@ _TABLE_PATTERN = re.compile(
 
 
 def strip_identifier_quotes(identifier: str) -> str:
-    return identifier.strip().strip("`")
+    value = identifier.strip()
+    if value.startswith("[") and value.endswith("]"):
+        return value[1:-1]
+    if value.startswith("`") and value.endswith("`"):
+        return value[1:-1]
+    if value.startswith('"') and value.endswith('"'):
+        return value[1:-1]
+    return value
 
 
 def split_table_name(table_name: str, default_schema: str | None = None) -> tuple[str | None, str]:
-    parts = [strip_identifier_quotes(part) for part in re.split(r"\s*\.\s*", table_name, maxsplit=1)]
-    if len(parts) == 2:
-        return parts[0], parts[1]
+    parts = [strip_identifier_quotes(part) for part in re.split(r"\s*\.\s*", table_name)]
+    if len(parts) >= 2:
+        return parts[-2], parts[-1]
     return default_schema, parts[0]
 
 

@@ -20,6 +20,7 @@ class MySQLInspector:
                     row = cursor.fetchone()
                     plan = next(iter(row.values())) if row else None
                     return {
+                        "database_type": "mysql",
                         "database": self.database,
                         "format": "json",
                         "plan": json.loads(plan) if isinstance(plan, str) else plan,
@@ -27,6 +28,7 @@ class MySQLInspector:
                 except Exception as json_error:
                     cursor.execute(f"EXPLAIN {statement}")
                     return {
+                        "database_type": "mysql",
                         "database": self.database,
                         "format": "tabular",
                         "plan": cursor.fetchall(),

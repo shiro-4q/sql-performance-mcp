@@ -1,4 +1,4 @@
-"""MySQL SQL performance analysis MCP server."""
+"""SQL performance analysis MCP server."""
 
 __all__ = ["__version__"]
 __version__ = "0.1.0"

@@ -3,7 +3,9 @@ from __future__ import annotations
 import json
 from typing import Any
 
-PROMPT_TEMPLATE = """You are a MySQL performance optimization expert.
+from ..db.factory import database_type_label
+
+PROMPT_TEMPLATE = """You are a {database_type} performance optimization expert.
 
 SQL:
 {sql}
@@ -31,10 +33,10 @@ def analyze_performance(
     execution_plan: Any,
     schema: Any,
     indexes: Any,
-    database_type: str = "MySQL",
+    database_type: str | None = None,
 ) -> str:
     return PROMPT_TEMPLATE.format(
-        database_type=database_type,
+        database_type=database_type_label(database_type),
         sql=sql,
         execution_plan=_format_context(execution_plan),
         schema=_format_context(schema),
