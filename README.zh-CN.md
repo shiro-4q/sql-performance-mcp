@@ -31,7 +31,7 @@ MySQL SQL 性能分析 MCP Server。
 
 - `sql`：要分析的 SQL。
 - `database`：可选的 MySQL 数据库名。
-- `tables`：可选的显式表名列表，适合复杂 SQL。
+- `tables`：可选的显式表名列表，适用于复杂 SQL 或自动提取表名不准确的场景。
 
 ### `get_indexes`
 
@@ -71,6 +71,28 @@ $env:MYSQL_CHARSET = "utf8mb4"
 $env:MYSQL_CONNECT_TIMEOUT = "10"
 ```
 
+## MCP Client 配置
+
+如果你的 MCP Client 直接从 PyPI 安装，可以这样配置：
+
+```json
+{
+  "mcpServers": {
+    "sql-performance-mcp": {
+      "command": "uvx",
+      "args": ["sql-performance-mcp"],
+      "env": {
+        "MYSQL_HOST": "127.0.0.1",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USER": "root",
+        "MYSQL_PASSWORD": "password",
+        "MYSQL_DATABASE": "app_db"
+      }
+    }
+  }
+}
+```
+
 ## 运行
 
 安装依赖：
@@ -85,7 +107,7 @@ uv sync
 uv run sql-performance-mcp
 ```
 
-如果不用 `uv`，可以安装 `requirements.txt` 后执行：
+如果不使用 `uv`，可以安装 `requirements.txt` 后直接运行：
 
 ```powershell
 python -m sql_performance_mcp.server
@@ -93,7 +115,6 @@ python -m sql_performance_mcp.server
 
 ## 说明
 
-- 当前只实现了 MySQL。
+- 目前只支持 MySQL。
 - `get_execution_plan` 只接受单条 SQL。
-- 表名提取覆盖常见的 `FROM`、`JOIN`、`UPDATE`、`INSERT INTO` 场景。对于 CTE、嵌套 SQL 或动态生成 SQL，建议显式传入 `tables`。
-
+- 表名提取覆盖常见的 `FROM`、`JOIN`、`UPDATE`、`INSERT INTO` 场景。对于 CTE、嵌套 SQL 或动态生成的 SQL，建议显式传入 `tables`。

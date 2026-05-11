@@ -71,6 +71,28 @@ $env:MYSQL_CHARSET = "utf8mb4"
 $env:MYSQL_CONNECT_TIMEOUT = "10"
 ```
 
+## MCP Client Configuration
+
+Use the published package from PyPI in your MCP client config:
+
+```json
+{
+  "mcpServers": {
+    "sql-performance-mcp": {
+      "command": "uvx",
+      "args": ["sql-performance-mcp"],
+      "env": {
+        "MYSQL_HOST": "127.0.0.1",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USER": "root",
+        "MYSQL_PASSWORD": "password",
+        "MYSQL_DATABASE": "app_db"
+      }
+    }
+  }
+}
+```
+
 ## Run
 
 Install dependencies:
@@ -96,4 +118,3 @@ python -m sql_performance_mcp.server
 - Only MySQL is implemented now.
 - `get_execution_plan` accepts one SQL statement only.
 - SQL table extraction covers common `FROM`, `JOIN`, `UPDATE`, and `INSERT INTO` patterns. For CTEs, nested SQL, or generated SQL, pass `tables` explicitly to schema and index tools.
-
