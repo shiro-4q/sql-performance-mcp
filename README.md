@@ -2,6 +2,8 @@
 
 [中文说明](README.zh-CN.md)
 
+[GitHub](https://github.com/shiro-4q/sql-performance-mcp)
+
 SQL performance analysis MCP server for MySQL, PostgreSQL, and SQL Server.
 
 The workflow is:
@@ -59,19 +61,14 @@ Builds a database-specific performance analysis prompt from:
 
 Set database connection settings with environment variables:
 
+MySQL:
+
 ```powershell
 $env:MYSQL_HOST = "127.0.0.1"
 $env:MYSQL_PORT = "3306"
 $env:MYSQL_USER = "root"
 $env:MYSQL_PASSWORD = "password"
 $env:MYSQL_DATABASE = "app_db"
-```
-
-Optional:
-
-```powershell
-$env:MYSQL_CHARSET = "utf8mb4"
-$env:MYSQL_CONNECT_TIMEOUT = "10"
 ```
 
 PostgreSQL:
@@ -98,6 +95,8 @@ Optional:
 
 ```powershell
 $env:SQL_PERFORMANCE_DB_TYPE = "mysql"
+$env:MYSQL_CHARSET = "utf8mb4"
+$env:MYSQL_CONNECT_TIMEOUT = "10"
 $env:POSTGRES_CONNECT_TIMEOUT = "10"
 $env:SQLSERVER_DRIVER = "ODBC Driver 18 for SQL Server"
 ```

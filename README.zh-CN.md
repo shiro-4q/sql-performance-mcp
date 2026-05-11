@@ -2,6 +2,8 @@
 
 [English README](README.md)
 
+[GitHub](https://github.com/shiro-4q/sql-performance-mcp)
+
 这是一个面向 MySQL、PostgreSQL 和 SQL Server 的 SQL 性能分析 MCP Server。
 
 工作流程：
